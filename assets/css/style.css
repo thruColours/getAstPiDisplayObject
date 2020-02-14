@@ -8,7 +8,7 @@
 @font-face {
   font-family: newFont;
   /* src: url(/assets/fonts/tommys.ttf); */
-  src: url(/assets/fonts/FakeHope.ttf);
+  src: url(./assets/fonts/FakeHope.ttf);
 
 }
 
