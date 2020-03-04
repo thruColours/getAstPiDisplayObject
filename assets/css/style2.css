@@ -38,8 +38,8 @@
 
 #totalAsteroids {
   font-size: 9vw;
-  font-family: newFont;
-  /* font-family: 'IBM Plex Sans', ; */
+  /* font-family: newFont; */
+  font-family: 'IBM Plex Sans';
 }
 
 .todTot {
@@ -47,8 +47,8 @@
   /* font-family: newFont; */
   font-size: 2.5vw;
   position: fixed;
-  top: 28vh;
-  left: 43vw;
+  top: 55vh;
+  left: 54.5vw;
   text-align: left;
   color: white;
   z-index: 1;
@@ -57,13 +57,14 @@
 .posTot {
   color: white;
   position: fixed;
-  top: 28.25vh;
-  left: 58.25vw;
+  top: 61vh;
+  left: 62.5vw;
+  text-align: right;
 }
 
 #potentiallyHazardous {
   font-size: 9vw;
-  font-family: newFont;
+  font-family: 'newFont';
   /* color: red; */
 }
 
@@ -73,7 +74,7 @@
   font-size: 2.5vw;
   position: fixed;
   top: 40.5vh;
-  left: 43vw;
+  left: 0vw;
   text-align: left;
   color: white;
   z-index: 1;
@@ -83,7 +84,7 @@
   color: red;
   position: fixed;
   top: 40.75vh;
-  left: 58.25vw;
+  left: 0vw;
 }
 
 #date {
@@ -96,8 +97,8 @@
   font-size: 2.5vw;
   position: fixed;
   width: 10vw;
-  top: 57vh;
-  left: 59vw;
+  top: 34.5vh;
+  left: 54.5vw;
   /* left: 43vw; */
   text-align: left;
   color: red;
@@ -108,11 +109,12 @@
   color: white;
   font-family: 'IBM Plex Sans';
   /* font-family: newFont; */
-  font-size: 2vw;
+  font-size: 3vw;
   z-index: 1;
-  left: 52.25vw;
-  top: 53vh;
+  left: 48vw;
+  top: 14vh;
   position: fixed;
+  text-align: left;
 }
 
 .dot {
@@ -180,12 +182,25 @@
 
 #time{
   position: absolute;
-  font-family: newFont;
-  font-size: 4vw;
-  top: 18vh;
-  left: 51.25vw;
+  font-family: 'IBM Plex Sans';
+  font-size: 6vw;
+  top: 80vh;
+  left: 45vw;
   color: white;
   animation: blink 1s alternate infinite;
+  text-align: center;
+}
+
+.timeNow {
+  font-family: 'IBM Plex Sans';
+  /* font-family: newFont; */
+  font-size: 2.5vw;
+  position: fixed;
+  top: 75.5vh;
+  left: 45vw;
+  text-align: left;
+  color: white;
+  z-index: 1;
 }
 
 @keyframes blink {
