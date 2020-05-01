@@ -6,8 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- api key: oc2osS1PDgSZWDOphc4r10HtzpHVZacT59v3drpp -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style3.css">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="assets/javascript/lib/p5.min.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/p5.dom.min.js"></script>
+		<script type="text/javascript" src="assets/javascript/lib/p5.sound.min.js"></script>
    <title>getAsteroidData</title>
   </head>
   <body class="bodi">
@@ -20,53 +24,57 @@
       </div> -->
 
       <!-- <div class="positionBox"> -->
+      <div class="earth">
 
-      <div class="timeNow">
-        time
-        <!-- <br /> -->
-        now
-      </div>
+        <img src="/assets/images/earthOutline.svg">
 
-
-      <div id="time"></div>
-
-        <div class="todTot">
-          total near <br />
-          earth asteroids
-        </div>
+        <div class="timeNow">
+          time
           <!-- <br /> -->
-        <div class="posTot">
-          <span id="totalAsteroids"></span>
+          now(UTC)
         </div>
 
-        <div class="potHaz">
+
+        <div id="time"></div>
+
+          <div class="todTot">
+            total near <br />
+            Earth asteroids
+          </div>
+            <!-- <br /> -->
+          <div class="posTot">
+            <span id="totalAsteroids"></span>
+          </div>
+
+          <!-- <div class="potHaz">
+            potentially
+            <br />
+            hazardous*
+          </div> -->
+
+          <div class="posHaz">
+            <span id="potentiallyHazardous"></span>
+          </div>
+
+            <!-- velocity: <span id="date"></span> -->
+            <!-- <br /> -->
+            <!-- <span id="closeApproch"> *Close approach time</span> -->
+
+            <!-- <span> <div id="hazTimeDisplay"></div></span> -->
+
+        <span id="closeApproch">
+          today's
+          <br />
           potentially
           <br />
-          hazardous*
-        </div>
+          hazardous
+          <br />
+          asteroids</span>
+        <div id="hazTimeDisplay"></div>
 
-        <div class="posHaz">
-          <span id="potentiallyHazardous"></span>
-        </div>
+        <!-- <div class="earth"> <img src="/assets/images/earthOutline.svg"> </div> -->
 
-          <!-- velocity: <span id="date"></span> -->
-          <!-- <br /> -->
-          <!-- <span id="closeApproch"> *Close approach time</span> -->
-
-          <!-- <span> <div id="hazTimeDisplay"></div></span> -->
-
-      <span id="closeApproch">
-        today's
-        <br />
-        potentially
-        <br />
-        hazardous
-        <br />
-        asteroids</span>
-      <div id="hazTimeDisplay"></div>
-
-      <div class="earth"> <img src="/assets/images/earthOutline.svg"> </div>
-
+      </div>
       <!-- <div class="dot">
       </div>
 
@@ -77,6 +85,10 @@
       </div> -->
 
     <script src="getAstDisplay.js"> </script>
+
+    <div class="clock">
+    <script type="text/javascript" src="clockTHREE.js"></script>
+    </div>
 
   </body>
 </html>

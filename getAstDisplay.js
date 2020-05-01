@@ -1,5 +1,5 @@
 
-// const api_url = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-02-23&end_date=2020-02-23&api_key=oc2osS1PDgSZWDOphc4r10HtzpHVZacT59v3drpp';
+// const api_url = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-01-02&end_date=2020-01-02&api_key=oc2osS1PDgSZWDOphc4r10HtzpHVZacT59v3drpp';
 const api_url = 'https://api.nasa.gov/neo/rest/v1/feed/today?detail=true&api_key=oc2osS1PDgSZWDOphc4r10HtzpHVZacT59v3drpp';
 //rate limit once per second
 
@@ -25,82 +25,71 @@ async function getAst() {
   let hazTimeDisplay = [];
   let hazTimeBr = [];
 
-    var today = new Date();
-    var hours = today.getHours();
-    if (hours < 10) {
-      hours = "0" + hours;
-    };
-    var minutes = today.getMinutes();
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    };
-  var time = hours + ":" + minutes;
+  let hazNa = [];
+  let nonHazNa = [];
 
-  // let hazTimeDisHours = Date.hazTimeDisplay.getHours();
-
-  //slice just time from each element in array????
-  // hazTimeDisplay.forEach(item  =>
-  //   item.slice( 5 , 10 ));
-  //   hazTimeBr.push();
-  // console.log(hazTimeBr);
+  // var today = new Date();
+  //
+  //   var hours = today.getHours();
+  //   if (hours < 10) {
+  //     hours = "0" + hours;
+  //   };
+  //   var minutes = today.getMinutes();
+  //   if (minutes < 10) {
+  //     minutes = "0" + minutes;
+  //   }
+  //   else if (minutes >= 10){
+  //     minutes = minutes;
+  //   };
+  //
+  // var time = hours + ":" + minutes;
 
   console.log(near_earth_objects);
-  // console.log(currentDate);
 
   //make sure to use '===' or atleast '==' you numpty!
   near_earth_objects[currentDate].forEach((item) => {
 
     astTimes.push(item.close_approach_data[0].epoch_date_close_approach);
-    allId.push(item.id);
 
-
-    if (item.is_potentially_hazardous_asteroid === true) {
-    totalHaz++;
-    hazId.push(item.id);
-    hazTimes.push(item.close_approach_data[0].epoch_date_close_approach);
-    hazTimeDisplay.push(item.close_approach_data[0].close_approach_date_full);
-    // hazTimeDisplay.push(item.close_approach_data[0].close_approach_date_full.replace(",", "<br />"));
-    // console.log(item.id);
+    if (item.is_potentially_hazardous_asteroid === true && item.close_approach_data[0].close_approach_date_full != null) {
+      totalHaz++;
+      hazTimes.push(item.close_approach_data[0].epoch_date_close_approach);
+      hazTimeDisplay.push(item.close_approach_data[0].close_approach_date_full + " " + item.name);
+      // hazName.push(item.name);
     }
-    console.log(item.is_potentially_hazardous_asteroid)
+
+    else if (item.is_potentially_hazardous_asteroid === true && item.close_approach_data[0].close_approach_date_full == null) {
+      totalHaz++;
+      hazNa.push(item.close_approach_data[0].close_approach_date_full + " " + item.name);
     }
-    );
 
-  //add fake date to check display positioning with break between each element
-  // hazTimeDisplay.push("2020-Feb-06 16:20")
-  console.log(hazTimeDisplay);
-
-  // astTimes.push(1581008220000);
-  // console.log(astTimes);
-
-  // allId.push("420");
-  // console.log(allId);
-  //
-  // hazId.push("420");
-  // console.log(hazId);
+   });
 
   //turn milliseconds into seconds (coeff) and use this to round current time to nearest minute
   //so can check if time of hazardous asteroid falls within the current minute
-  let coeff = 1000 * 60;
-  let date = new Date();
-  let rounded = new Date(Math.round(date.getTime()/ coeff) * coeff);
+  // let coeff = 1000 * 60;
+  // // let date = new Date();
+  // let rounded = new Date(Math.round(today.getTime()/ coeff) * coeff);
 
   // differenceMs = [hazTimes - rounded];
   // displayDistMins = differenceMs/60000;
   // console.log(displayDistMins);
   // console.log(differenceMs);
   // get current time in Unix
-  console.log(date.getTime());
+  // console.log(date.getTime());
 
   //create array with time til close approach in minutes (do for both Haz and nonHaz)
-  hazCalc = x => (x - rounded)/60000;
-  hazDistance = hazTimes.map(hazCalc);
-  console.log(hazDistance);
+  // hazCalc = x => (x - rounded)/60000;
+  // hazDistance = hazTimes.map(hazCalc);
+  // console.log(hazDistance);
 
-  hazCalc3 = x => x.slice(12, 17);
+  hazCalc3 = x => x.slice(12, 50);
   hazSlice = hazTimeDisplay.map(hazCalc3);
   hazSlice.sort();
   console.log(hazSlice);
+
+  nullCalc = x => x.replace("null", "N/A");
+  hazNullToNa = hazNa.map(nullCalc);
 
   if (hazTimes == 0) {
     hazSlice.push("ZERO");
@@ -109,36 +98,59 @@ async function getAst() {
   // near_earth_objects.[2020-01-31].id.push("420");
   // console.log(data.id);
 
-  //convert id of hazardous to string, add to allId array and check the existence of string correlates with time
-  if (astTimes.includes(rounded.getTime())&&hazTimes.includes(rounded.getTime())) {
-    console.log("potentially hazardous animation");
 
-  }
-  else if (astTimes.includes(rounded.getTime())){
-    console.log("normal animation");
 
-  }
-  else {
-    console.log("no animation");
-  };
+  // if (astTimes.includes(rounded.getTime())&&hazTimes.includes(rounded.getTime())) {
+  //   console.log("potentially hazardous animation");
+  //
+  // }
+  // else if (astTimes.includes(rounded.getTime())){
+  //   console.log("normal animation");
+  //
+  // }
+  // else {
+  //   console.log("no animation");
+  // };
 
   // if (displayDistMin <= 30) {
   //
   // }
 
-  document.getElementById('totalAsteroids').textContent = element_count;
+  document.getElementById('totalAsteroids').textContent = element_count + "\r\n" + nonHazNa.join("\r\n");
   document.getElementById('potentiallyHazardous').textContent = totalHaz;
-  document.getElementById('hazTimeDisplay').textContent = hazSlice.join("\r\n");
-  document.getElementById('time').textContent = time;
+  document.getElementById('hazTimeDisplay').textContent = hazSlice.join("\r\n") + "\r\n" + hazNullToNa.join("\r\n");
+  // document.getElementById('time').textContent = time;
   // document.getElementById('date').textContent = displayDate;
   // document.getElementById('vel').textContent = velocity;
 
 
   }
 
+  function timeFoo () {
+
+    var today = new Date();
+
+      var hours = today.getHours();
+      if (hours < 10) {
+        hours = "0" + hours;
+      };
+      var minutes = today.getMinutes();
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      else if (minutes >= 10){
+        minutes = minutes;
+      };
+
+    var time = hours + ":" + minutes;
+
+    document.getElementById('time').textContent = time;
+
+  };
+
+
   getAst().catch(alert);
 
-// getISS();
-
+  setInterval(timeFoo, 1000);
   setInterval(getAst, 60000);
 
