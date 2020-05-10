@@ -21,12 +21,12 @@ async function getAst() {
   let allId = [];
   let hazId = [];
 
-  let hazString = hazId.toString();
+  // let hazString = hazId.toString();
   let hazTimeDisplay = [];
-  let hazTimeBr = [];
+  // let hazTimeBr = [];
 
-  let hazNa = [];
-  let nonHazNa = [];
+  // let hazNa = [];
+  let nonHaz = 0;
 
   // var today = new Date();
   //
@@ -58,12 +58,20 @@ async function getAst() {
       // hazName.push(item.name);
     }
 
-    else if (item.is_potentially_hazardous_asteroid === true && item.close_approach_data[0].close_approach_date_full == null) {
-      totalHaz++;
-      hazNa.push(item.close_approach_data[0].close_approach_date_full + " " + item.name);
+    else if (item.is_potentially_hazardous_asteroid === false && item.close_approach_data[0].close_approach_date_full != null) {
+      nonHaz ++;
     }
 
    });
+
+   hazCalc3 = x => x.slice(12, 50);
+   hazSlice = hazTimeDisplay.map(hazCalc3);
+   hazSlice.sort();
+   console.log(hazSlice);
+
+   if (hazTimes == 0) {
+     hazSlice.push("ZERO");
+   };
 
   //turn milliseconds into seconds (coeff) and use this to round current time to nearest minute
   //so can check if time of hazardous asteroid falls within the current minute
@@ -83,22 +91,11 @@ async function getAst() {
   // hazDistance = hazTimes.map(hazCalc);
   // console.log(hazDistance);
 
-  hazCalc3 = x => x.slice(12, 50);
-  hazSlice = hazTimeDisplay.map(hazCalc3);
-  hazSlice.sort();
-  console.log(hazSlice);
-
-  nullCalc = x => x.replace("null", "N/A");
-  hazNullToNa = hazNa.map(nullCalc);
-
-  if (hazTimes == 0) {
-    hazSlice.push("ZERO");
-  };
-
-  // near_earth_objects.[2020-01-31].id.push("420");
-  // console.log(data.id);
 
 
+  //turning null to N/A not needed as these are typically duplicates
+  // nullCalc = x => x.replace("null", "N/A");
+  // hazNullToNa = hazNa.map(nullCalc);
 
   // if (astTimes.includes(rounded.getTime())&&hazTimes.includes(rounded.getTime())) {
   //   console.log("potentially hazardous animation");
@@ -116,9 +113,9 @@ async function getAst() {
   //
   // }
 
-  document.getElementById('totalAsteroids').textContent = element_count + "\r\n" + nonHazNa.join("\r\n");
+  document.getElementById('nonHazAsteroids').textContent = nonHaz;
   document.getElementById('potentiallyHazardous').textContent = totalHaz;
-  document.getElementById('hazTimeDisplay').textContent = hazSlice.join("\r\n") + "\r\n" + hazNullToNa.join("\r\n");
+  document.getElementById('hazTimeDisplay').textContent = hazSlice.join("\r\n");
   // document.getElementById('time').textContent = time;
   // document.getElementById('date').textContent = displayDate;
   // document.getElementById('vel').textContent = velocity;

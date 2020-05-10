@@ -45,7 +45,7 @@
   transform: scale(1.725);
 }
 
-#totalAsteroids {
+#nonHazAsteroids {
   font-size: 5vmin;
   /* font-family: newFont; */
   font-family: 'IBM Plex Sans';
